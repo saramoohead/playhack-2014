@@ -16,6 +16,8 @@ angular.module('game')
           'Right Foot',
         ];
 
+    var firstSpin = true;
+
     return {
       restrict: 'E',
       scope: {},
@@ -23,7 +25,9 @@ angular.module('game')
       link: function ($scope, element, attr) {
         var $spinner = element.find('.spinner'),
             $textOutput = element.find('.spinner-text-output'),
-            sectionArc = (360 / sectionNames.length);
+            sectionArc = (360 / sectionNames.length),
+            $tickAudio = element.find('.spinner-audio-tick')[0],
+            $dingAudio = element.find('.spinner-audio-ding')[0];
 
         $spinner.append('<div class="spinner-arm-container"><div class="spinner-arm"></div></div>');
         $.each(sectionNames, function (index, sectionName) {
@@ -63,6 +67,13 @@ angular.module('game')
                 currentDeg = match ? parseFloat(match[1]) : 0,
                 currentIndex = 0;
 
+            // scripting the first demo hit
+            if (firstSpin) {
+              itemIndex = 16;
+              $item = $($itemsList[itemIndex]);
+              revolutions = 4;
+            }
+
             disable = true;
             $textOutput.text('Spinning…');
             currentDeg = Math.floor(currentDeg) % 360 + (currentDeg - Math.floor(currentDeg));
@@ -76,6 +87,9 @@ angular.module('game')
                     $($itemsList[currentIndex]).removeClass('active');
                     currentIndex = idx;
                     $($itemsList[currentIndex]).addClass('active');
+                    $tickAudio.pause();
+                    $tickAudio.currentTime = 0;
+                    $tickAudio.play();
                   }
                   $arm.css('transform', 'rotate(' + deg + 'deg)');
                 };
@@ -85,6 +99,12 @@ angular.module('game')
                   $($itemsList[currentIndex]).removeClass('active');
                   $item.addClass('active');
 
+                  if (firstSpin) {
+                    element.find('.spinner-audio-bazinga')[0].play();
+                    firstSpin = false;
+                  }
+
+                  $dingAudio.play();
                   $textOutput.html([$item.data('section'), ' - <span class="', $item.data('color'), '-color">', $item.data('choice'), '</span>'].join(''));
                   disable = false;
                 };

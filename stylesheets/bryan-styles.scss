@@ -7,6 +7,7 @@
   border-radius: 250px;
   background-color: lightblue;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .spinner:after {
@@ -17,9 +18,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url(../assets/logo_brand.png);
+  background-image: url(../assets/logo_brand_remix.png);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: 50% 52%;
 }
 
 .spinner-section {
@@ -89,6 +90,7 @@
   background-color: white;
   box-shadow: 0 0 5px gray;
   border: none;
+  overflow: hidden;
 }
 
 .nav.navbar-nav li.active a,

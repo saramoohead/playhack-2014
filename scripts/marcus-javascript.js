@@ -90,263 +90,267 @@
         transparent: [255, 255, 255]
     }
 })(jQuery);
+
 (function () {
-	$(window).load(function() {
-		$('audio').each(function(){
-		     $(this)[0].volume = 0;
-		     $(this)[0].play();
-		});
-		//Bind events
-		$(document).on( "click", ".twister-btn", function() {
-		  	$(this).children(":first")[0].play();
-		});
-		
-		$(document).on('keyup',function(e){
-		    var key = String.fromCharCode(e.which).toLowerCase();
-		   console.log("keyup - " + key);
-		    switch (key) {
-			    //fire green sounds
-			    case "1":
-			        changeAudio("green", 0, false);
-			        break;
-			    case "2":
-			        changeAudio("green", 1, false);
-			        break;
-			    case "3":
-			        changeAudio("green", 2, false);
-			        break;
-			    case "4":
-			        changeAudio("green", 3, false);
-			        break;
-			    case "5":
-			        changeAudio("green", 4, false);
-			        break;
-			    case "6":
-			        changeAudio("green", 5, false);
-			        break;
-			    //fire yellow sounds
-			    case "q":
-			        changeAudio("yellow", 0, false);
-			        break;
-			    case "w":
-			        changeAudio("yellow", 1, false);
-			        break;
-			    case "e":
-			        changeAudio("yellow", 2, false);
-			        break;
-			    case "r":
-			        changeAudio("yellow", 3, false);
-			        break;
-			    case "t":
-			        changeAudio("yellow", 4, false);
-			        break;
-			    case "y":
-			        changeAudio("yellow", 5, false);
-			        break;
-			    //fire blue sounds
-			    case "a":
-			        changeAudio("blue", 0, false);
-			        break;
-			    case "s":
-			        changeAudio("blue", 1, false);
-			        break;
-			    case "d":
-			        changeAudio("blue", 2, false);
-			        break;
-			    case "f":
-			        changeAudio("blue", 3, false);
-			        break;
-			    case "g":
-			        changeAudio("blue", 4, false);
-			        break;
-			    case "h":
-			        changeAudio("blue", 5, false);
-			        break;
-		    	//fire red sounds
-			    case "z":
-			        changeAudio("red", 0, false);
-			        break;
-			    case "x":
-			        changeAudio("red", 1, false);
-			        break;
-			    case "c":
-			        changeAudio("red", 2, false);
-			        break;
-			    case "v":
-			        changeAudio("red", 3, false);
-			        break;
-			    case "b":
-			        changeAudio("red", 4, false);
-			        break;
-			    case "n":
-			        changeAudio("red", 5, false);
-			        break;
-			}
-		});
-		
-		$(document).on('keydown',function(e){
-		    var key = String.fromCharCode(e.which).toLowerCase();
-		    console.log("keydown - " + key);
-		    switch (key) {
-			    //fire green sounds
-			    case "1":
-			        changeAudio("green", 0, true);
-			        break;
-			    case "2":
-			        changeAudio("green", 1, true);
-			        break;
-			    case "3":
-			        changeAudio("green", 2, true);
-			        break;
-			    case "4":
-			        changeAudio("green", 3, true);
-			        break;
-			    case "5":
-			        changeAudio("green", 4, true);
-			        break;
-			    case "6":
-			        changeAudio("green", 5, true);
-			        break;
-			    //fire yellow sounds
-			    case "q":
-			        changeAudio("yellow", 0, true);
-			        break;
-			    case "w":
-			        changeAudio("yellow", 1, true);
-			        break;
-			    case "e":
-			        changeAudio("yellow", 2, true);
-			        break;
-			    case "r":
-			        changeAudio("yellow", 3, true);
-			        break;
-			    case "t":
-			        changeAudio("yellow", 4, true);
-			        break;
-			    case "y":
-			        changeAudio("yellow", 5, true);
-			        break;
-			    //fire blue sounds
-			    case "a":
-			        changeAudio("blue", 0, true);
-			        break;
-			    case "s":
-			        changeAudio("blue", 1, true);
-			        break;
-			    case "d":
-			        changeAudio("blue", 2, true);
-			        break;
-			    case "f":
-			        changeAudio("blue", 3, true);
-			        break;
-			    case "g":
-			        changeAudio("blue", 4, true);
-			        break;
-			    case "h":
-			        changeAudio("blue", 5, true);
-			        break;
-		    	//fire red sounds
-			    case "z":
-			        changeAudio("red", 0, true);
-			        break;
-			    case "x":
-			        changeAudio("red", 1, true);
-			        break;
-			    case "c":
-			        changeAudio("red", 2, true);
-			        break;
-			    case "v":
-			        changeAudio("red", 3, true);
-			        break;
-			    case "b":
-			        changeAudio("red", 4, true);
-			        break;
-			    case "n":
-			        changeAudio("red", 5, true);
-			        break;
-			}
-		});
-		
-	});
-	
-	//var keyPresses = [];
-	
-	function changeAudioPlayerSrc(src, id){
-        var audioElement = document.getElementById(id);
-        audioElement.src=src;
-        audioElement.load(); //call this to just preload the audio without playing
-        audioElement.play(); //call this to play the song right away
-        return audioElement;
-	}
-	
-	function createAudioPlayer(src, id){
-		var audioElement;
-        audioElement = new Audio("");
-		
-		(function(audioElement){
+  $(window).load(function() {
+    $('audio').each(function(){
+      $(this)[0].volume = 0;
+      $(this)[0].play();
+    });
 
-        document.body.appendChild(audioElement);
-		audioElement.autobuffer = true;
-        audioElement.id = id;
-		audioElement.setAttribute("preload", "auto");
-		if (audioElement.canPlayType('audio/mpeg;')) {
-        	var source= document.createElement('source');
-		    source.type = 'audio/mpeg';
-		    source.src = src + '.mp3';
-			audioElement.appendChild(source);
-		}
-		if (audioElement.canPlayType('audio/mpeg;')) {
-        	var source= document.createElement('source');
-		    source.type = 'audio/ogg';
-		    source.src = src + '.ogg';
-			audioElement.appendChild(source);
-		}
-		audioElement.src = src + ".ogg";
-		audioElement.load();
+    //Bind events
+    $(document).on( "click", ".twister-btn", function() {
+      $(this).children(":first")[0].play();
+    });
 
-        
-        audioElement.addEventListener('canplaythrough', function() {
-            audioElement.play();
-        }, false);
-        audioElement.onerror = function(event) {
-           console.log("Failed to load audio: " + event.code);
+    $(document).on('keyup',function(e){
+      var key = String.fromCharCode(e.which).toLowerCase(),
+          bool = false;
+      console.log("keyup - " + key);
+      switch (key) {
+        //fire green sounds
+        case "":
+          changeAudio("green", 0, bool);
+        break;
+        case "t":
+          changeAudio("green", 1, bool);
+        break;
+        case "s":
+          changeAudio("green", 2, bool);
+        break;
+        case "h":
+          changeAudio("green", 3, bool);
+        break;
+        case "c":
+          changeAudio("green", 4, bool);
+        break;
+        case "n":
+          changeAudio("green", 5, bool);
+        break;
+        //fire yellow sounds
+        case "":
+          changeAudio("yellow", 0, bool);
+        break;
+        case "y":
+          changeAudio("yellow", 1, bool);
+        break;
+        case "a":
+          changeAudio("yellow", 2, bool);
+        break;
+        case "f":
+          changeAudio("yellow", 3, bool);
+        break;
+        case "z":
+          changeAudio("yellow", 4, bool);
+        break;
+        case "b":
+          changeAudio("yellow", 5, bool);
+        break;
+        //fire blue sounds
+        case "r":
+          changeAudio("blue", 0, bool);
+        break;
+        case "q":
+          changeAudio("blue", 1, bool);
+        break;
+        case "d":
+          changeAudio("blue", 2, bool);
+        break;
+        case "g":
+          changeAudio("blue", 3, bool);
+        break;
+        case "v":
+          changeAudio("blue", 4, bool);
+        break;
+        case "":
+          changeAudio("blue", 5, bool);
+        break;
+        //fire red sounds
+        case "e":
+          changeAudio("red", 0, bool);
+        break;
+        case "w":
+          changeAudio("red", 1, bool);
+        break;
+        case "":
+          changeAudio("red", 2, bool);
+        break;
+        case "":
+          changeAudio("red", 3, bool);
+        break;
+        case "":
+          changeAudio("red", 4, bool);
+        break;
+        case "x":
+          changeAudio("red", 5, bool);
+        break;
+      }
+    });
+
+    $(document).on('keydown',function(e){
+      var key = String.fromCharCode(e.which).toLowerCase(),
+          bool = true;
+      console.log("keydown - " + key);
+      switch (key) {
+        //fire green sounds
+        case "":
+          changeAudio("green", 0, bool);
+        break;
+        case "t":
+          changeAudio("green", 1, bool);
+        break;
+        case "s":
+          changeAudio("green", 2, bool);
+        break;
+        case "h":
+          changeAudio("green", 3, bool);
+        break;
+        case "c":
+          changeAudio("green", 4, bool);
+        break;
+        case "n":
+          changeAudio("green", 5, bool);
+        break;
+        //fire yellow sounds
+        case "":
+          changeAudio("yellow", 0, bool);
+        break;
+        case "y":
+          changeAudio("yellow", 1, bool);
+        break;
+        case "a":
+          changeAudio("yellow", 2, bool);
+        break;
+        case "f":
+          changeAudio("yellow", 3, bool);
+        break;
+        case "z":
+          changeAudio("yellow", 4, bool);
+        break;
+        case "b":
+          changeAudio("yellow", 5, bool);
+        break;
+        //fire blue sounds
+        case "r":
+          changeAudio("blue", 0, bool);
+        break;
+        case "q":
+          changeAudio("blue", 1, bool);
+        break;
+        case "d":
+          changeAudio("blue", 2, bool);
+        break;
+        case "g":
+          changeAudio("blue", 3, bool);
+        break;
+        case "v":
+          changeAudio("blue", 4, bool);
+        break;
+        case "":
+          changeAudio("blue", 5, bool);
+        break;
+        //fire red sounds
+        case "e":
+          changeAudio("red", 0, bool);
+        break;
+        case "w":
+          changeAudio("red", 1, bool);
+        break;
+        case "":
+          changeAudio("red", 2, bool);
+        break;
+        case "":
+          changeAudio("red", 3, bool);
+        break;
+        case "":
+          changeAudio("red", 4, bool);
+        break;
+        case "x":
+          changeAudio("red", 5, bool);
+        break;
+      }
+    });
+
+  });
+
+  //var keyPresses = [];
+
+  function changeAudioPlayerSrc(src, id){
+    var audioElement = document.getElementById(id);
+    audioElement.src=src;
+    audioElement.load(); //call this to just preload the audio without playing
+    audioElement.play(); //call this to play the song right away
+    return audioElement;
+  }
+
+  function createAudioPlayer(src, id){
+    var audioElement;
+    audioElement = new Audio("");
+
+    (function(audioElement){
+
+      document.body.appendChild(audioElement);
+      audioElement.autobuffer = true;
+      audioElement.id = id;
+      audioElement.setAttribute("preload", "auto");
+      if (audioElement.canPlayType('audio/mpeg;')) {
+        var source= document.createElement('source');
+        source.type = 'audio/mpeg';
+        source.src = src + '.mp3';
+        audioElement.appendChild(source);
+      }
+      if (audioElement.canPlayType('audio/mpeg;')) {
+        var source= document.createElement('source');
+        source.type = 'audio/ogg';
+        source.src = src + '.ogg';
+        audioElement.appendChild(source);
+      }
+      audioElement.src = src + ".ogg";
+      audioElement.load();
+
+
+      audioElement.addEventListener('canplaythrough', function() {
+        audioElement.play();
+      }, false);
+      audioElement.onerror = function(event) {
+        console.log("Failed to load audio: " + event.code);
+      }
+
+      if (typeof audioElement.loop == 'boolean')
+        {
+          audioElement.loop = true;
         }
-        
-		if (typeof audioElement.loop == 'boolean')
-		{
-		    audioElement.loop = true;
-		}
-		else
-		{
-		    audioElement.addEventListener('ended', function() {
-		        this.currentTime = 0.1;
-		        this.play();
-		    }, false);
-		}
-		if (typeof audioElement.autoplay == 'boolean')
-		{
-		    audioElement.autoplay = true;
-		}
-		}(audioElement));
-        return audioElement;
-	}
-	
-	function changeAudio(color, num, play){
-		if(play === true){//} && keyPresses["color"+num] == false){
-			//keyPresses["color"+num] == true;
-			$('#' + color + "-button-" + num).children(":first").stop().animate({ backgroundColor: color }, "slow");
-			if($('#' + color + "-audio-" + num).length == 0){
-				createAudioPlayer("assets/audio/" + color + num + "",  color + "-audio-" + num);
-			}
-		}else{
-			$('#' + color + "-button-" + num).children(":first").stop().animate({ backgroundColor: "darkgrey" }, "slow");
-			if($('#' + color + "-audio-" + num).length > 0){
-				$('#' + color + "-audio-" + num)[0].volume = 0.0;
-				$('#' + color + "-audio-" + num)[0].pause();
-				$('#' + color + "-audio-" + num).remove();
-			}
-			//keyPresses["color"+num] == false;
-		}
-	}
+        else
+          {
+            audioElement.addEventListener('ended', function() {
+              this.currentTime = 0.1;
+              this.play();
+            }, false);
+          }
+          if (typeof audioElement.autoplay == 'boolean')
+            {
+              audioElement.autoplay = true;
+            }
+    }(audioElement));
+    return audioElement;
+  }
+
+  function changeAudio(color, num, play){
+    if(play === true){//} && keyPresses["color"+num] == false){
+      //keyPresses["color"+num] == true;
+      $('#' + color + "-button-" + num).children(":first").stop().animate({ backgroundColor: color }, "slow");
+      if($('#' + color + "-audio-" + num).length == 0){
+        createAudioPlayer("assets/audio/" + color + num + "",  color + "-audio-" + num);
+      }
+    }else{
+      $('#' + color + "-button-" + num).children(":first").stop().animate({ backgroundColor: "darkgrey" }, "slow");
+      if($('#' + color + "-audio-" + num).length > 0){
+        $('#' + color + "-audio-" + num)[0].volume = 0.0;
+        $('#' + color + "-audio-" + num)[0].pause();
+        $('#' + color + "-audio-" + num).remove();
+      }
+      //keyPresses["color"+num] == false;
+    }
+  }
 })();
 
