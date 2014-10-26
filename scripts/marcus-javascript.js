@@ -341,6 +341,7 @@
 		}else{
 			$('#' + color + "-button-" + num).children(":first").stop().animate({ backgroundColor: "darkgrey" }, "slow");
 			if($('#' + color + "-audio-" + num).length > 0){
+				$('#' + color + "-audio-" + num)[0].volume = 0.0;
 				$('#' + color + "-audio-" + num)[0].pause();
 				$('#' + color + "-audio-" + num).remove();
 			}

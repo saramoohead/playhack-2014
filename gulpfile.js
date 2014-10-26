@@ -5,8 +5,8 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     inject = require('gulp-inject'),
     plumber = require('gulp-plumber'),
-    // angularFilesort = require('gulp-angular-filesort'),
-    // templateCache = require('gulp-angular-templatecache'),
+    angularFilesort = require('gulp-angular-filesort'),
+    templateCache = require('gulp-angular-templatecache'),
     connect = require('gulp-connect');
 
 var outputDir = 'output',
@@ -23,15 +23,15 @@ gulp.task('connect', function () {
     port: 3000,
   });
 });
-//
-//
-// gulp.task('templates', function () {
-//   return gulp.src(rootDir + '/**/*.html')
-//     .pipe(templateCache({
-//       standalone: true,
-//     }))
-//     .pipe(gulp.dest(rootDir));
-// });
+
+
+gulp.task('templates', function () {
+  return gulp.src(rootDir + '/**/*.html')
+    .pipe(templateCache({
+      standalone: true,
+    }))
+    .pipe(gulp.dest(rootDir));
+});
 
 
 gulp.task('css-compile', function () {
@@ -53,10 +53,11 @@ gulp.task('js-jshint', function () {
 });
 
 
-gulp.task('js-inject', function () {
+gulp.task('js-inject', ['templates'], function () {
   return gulp.src([viewsDir + '/**/*.html'])
     .pipe(inject(gulp.src('**/*.js', { cwd: rootDir })
-      .pipe(plumber()), {
+      .pipe(plumber())
+      .pipe(angularFilesort()), {
         starttag: '<!-- inject:js -->',
         endtag: '<!-- endinject -->',
       }))
