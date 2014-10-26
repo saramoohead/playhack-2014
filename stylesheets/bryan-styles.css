@@ -1,1 +1,18 @@
+.spinner {
+  display: block;
+  margin: auto;
+  position: relative;
+  height: 500px;
+  width: 500px;
+  background-color: blue;
+}
 
+.spinner:after {
+  content: "";
+  position: absolute;
+  height: 800px;
+  width: 800px;
+  border-radius: 400px;
+  border: 250px solid white;
+  background-color: transparent;
+}
