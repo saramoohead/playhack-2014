@@ -1,0 +1,148 @@
+.spinner {
+  display: block;
+  margin: auto;
+  position: relative;
+  height: 500px;
+  width: 500px;
+  border-radius: 250px;
+  background-color: lightblue;
+  overflow: hidden;
+}
+
+.spinner:after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(../assets/logo_brand.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.spinner-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+}
+
+.spinner-section-name {
+  z-index: 2;
+  margin: 100px 0 0 0 ;
+  display: block;
+  text-align: center;
+}
+
+.spinner-section-item {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  text-align: center;
+  z-index: 2;
+}
+
+.item-circle {
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  display: block;
+  border-radius: 25px;
+  border: 1px solid white;
+}
+
+.spinner-section-item.active .item-circle {
+  border: 3px solid white;
+}
+
+.spinner-arm-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.spinner-arm {
+  position: absolute;
+  left: 49.5%;
+  right: 49.5%;
+  bottom: 50%;
+  top: 10%;
+  background-color: black;
+  border-radius: 0 2px 2px 0;
+}
+
+.spinner-text-output {
+  text-align: center;
+  font-size: 18px;
+}
+
+.navbar.navbar-default {
+  background-color: white;
+  box-shadow: 0 0 5px gray;
+  border: none;
+}
+
+.nav.navbar-nav li.active a,
+.nav.navbar-nav li a:hover,
+.nav.navbar-nav li.active a:hover {
+  background-color: transparent;
+  box-sizing: border-box;
+  border-bottom: 2px solid transparent;
+}
+
+.blue-border {
+  border-color: #33B3EC !important;
+}
+
+.blue-background {
+  background-color: #33B3EC !important;
+}
+
+.blue-color {
+  color: #33B3EC !important;
+}
+
+.red-border {
+  border-color: #F93B4B !important;
+}
+
+.red-background {
+  background-color: #F93B4B !important;
+}
+
+.red-color {
+  color: #F93B4B !important;
+}
+
+.green-border {
+  border-color: #97CA4E !important;
+}
+
+.green-background {
+  background-color: #97CA4E !important;
+}
+
+.green-color {
+  color: #97CA4E !important;
+}
+
+.yellow-border {
+  border-color: #F7F449 !important;
+}
+
+.yellow-background {
+  background-color: #F7F449 !important;
+}
+
+.yellow-color {
+  color: #F7F449 !important;
+}

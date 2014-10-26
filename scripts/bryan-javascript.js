@@ -2,11 +2,11 @@
   'use strict';
 
   var choices = [
-        { name: 'Red', html: '<div class="item-circle" style="background-color: red"></div>' },
-        { name: 'Blue', html: '<div class="item-circle" style="background-color: blue"></div>' },
-        { name: 'Green', html: '<div class="item-circle" style="background-color: green"></div>' },
-        { name: 'Yellow', html: '<div class="item-circle" style="background-color: yellow"></div>' },
-        { name: 'On Air', html: '<div class="item-circle" style="background-color: lightgray"></div>' },
+        { name: 'Red', color: 'red', html: '<div class="item-circle red-background"></div>' },
+        { name: 'Blue', color: 'blue', html: '<div class="item-circle blue-background"></div>' },
+        { name: 'Green', color: 'green', html: '<div class="item-circle green-background"></div>' },
+        { name: 'Yellow', color: 'yellow', html: '<div class="item-circle yellow-background"></div>' },
+        { name: 'On Air', color: 'gray', html: '<div class="item-circle" style="background-color: lightgray"></div>' },
       ],
       sectionNames = [
         'Left Hand',
@@ -32,6 +32,7 @@
         $item.css('transform', 'rotate(' + (sectionArc * choiceIndex / choices.length - (sectionArc/2 * (choices.length - 1) / choices.length)) + 'deg)');
         $item.data('section', sectionName);
         $item.data('choice', choices[choiceIndex].name);
+        $item.data('color', choices[choiceIndex].color);
       });
 
       $section.css('transform', 'rotate(' + (360 * index / sectionNames.length) + 'deg)');
@@ -55,24 +56,32 @@
             itemIndex = Math.floor(Math.random() * $itemsList.length),
             $item = $($itemsList[itemIndex]),
             match = /rotate\((\d+\.\d+|\d+)deg\)/.exec($arm.attr('style')),
-            currentDeg = match ? parseFloat(match[1]) : 0;
+            currentDeg = match ? parseFloat(match[1]) : 0,
+            currentIndex = 0;
 
         disable = true;
         $textOutput.text('Spinning…');
         currentDeg = Math.floor(currentDeg) % 360 + (currentDeg - Math.floor(currentDeg));
         $itemsList.removeClass('active');
-        $({ deg: currentDeg }).animate({deg: ((itemIndex - 1.5 * choices.length + 0.5) * stepSize + revolutions * 360) }, {
+        $({ deg: currentDeg }).animate({deg: ((itemIndex - 0.5 * choices.length + 0.5) * stepSize + revolutions * 360) }, {
           duration: (revolutions + 1) * 1000,
           step: (function ($arm) {
             return function (deg) {
+              var idx = Math.floor(deg / stepSize + 0.5 * choices.length) % $itemsList.length;
+              if (idx !== currentIndex) {
+                $($itemsList[currentIndex]).removeClass('active');
+                currentIndex = idx;
+                $($itemsList[currentIndex]).addClass('active');
+              }
               $arm.css('transform', 'rotate(' + deg + 'deg)');
             };
           })($arm),
           complete: (function ($item) {
             return function () {
+              $($itemsList[currentIndex]).removeClass('active');
               $item.addClass('active');
 
-              $textOutput.text(['Landed on', $item.data('choice'), 'from section', $item.data('section')].join(' '));
+              $textOutput.html([$item.data('section'), ' - <span class="', $item.data('color'), '-color">', $item.data('choice'), '</span>'].join(''));
               disable = false;
             };
           })($item),

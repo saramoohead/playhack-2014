@@ -6,26 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
 
-  <link rel="stylesheet" href="./stylesheets/bryan-styles.css">
-  <link rel="stylesheet" href="./stylesheets/marcus-styles.css">
-  <link rel="stylesheet" href="./assets/stylesheets/bootstrap-3.2.0.min.css">
-  <style>
-    body{
-      margin-top:100px;
-    }
-
-    .twister-btn {
-      border-radius: 50%;
-      width: 70px;
-      height: 70px;
-      background-color: darkgrey;
-      /* width and height can be anything, as long as they're equal */
-    }
-
-    .buttons-row{
-      height:115px;
-    }
-  </style>
+  <link rel="stylesheet" href="assets/stylesheets/bootstrap-3.2.0.min.css">
+  <link rel="stylesheet" href="application.css">
 </head>
 <body>
 
@@ -43,12 +25,13 @@
           <img src="assets/logo_brand.png" height="50" style="margin:0px;padding:0px;margin-top:-15px;" alt="Twister"/>
         </a>
       </div>
+
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Play</a></li>
-          <li><a href="#">My Tracks</a></li>
-          <li><a href="#">Record Track</a></li>
-          <li><a href="#">Search</a></li>
+          <li class="active"><a href="#" class="red-border">Play</a></li>
+          <li><a href="#" class="blue-border">My Tracks</a></li>
+          <li><a href="#" class="green-border">Record Track</a></li>
+          <li><a href="#" class="yellow-border">Search</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Current Track: <span style="color:#ed1848;">Rudimental - Home</span></a></li>
@@ -270,9 +253,9 @@
     </div>
   </div>
 
-  <script src="./assets/javascript/jquery-2.1.1.js"></script>
-  <script src="./assets/javascript/bootstrap-3.2.0.min.js"></script>
-  <script src="./scripts/bryan-javascript.js"></script>
-  <script src="./scripts/marcus-javascript.js"></script>
+  <script src="assets/javascript/jquery-2.1.1.js"></script>
+  <script src="assets/javascript/bootstrap-3.2.0.min.js"></script>
+  <!-- inject:js -->
+  <!-- endinject -->
 </body>
 </html>
